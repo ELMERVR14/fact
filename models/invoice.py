@@ -94,7 +94,7 @@ class account_invoice(models.Model):
                     "fechaVencimiento":str(invoice.date_due).replace("/","-",3),
                     "horaEmision":currentTime,
                     'totalVentaGravada': total_venta_gravada,
-                    'sumatoriaIgv': sumatoria_ivg,
+                    'sumatoriaIgv': str(round(float(sumatoria_ivg),2))
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
@@ -185,7 +185,7 @@ class account_invoice(models.Model):
                     "fechaVencimiento":str(invoice.date_due).replace("/","-",3),
                     "horaEmision":currentTime,
                     'totalVentaGravada': total_venta_gravada,
-                    'sumatoriaIgv': sumatoria_ivg,
+                    'sumatoriaIgv': str(round(float(sumatoria_ivg),2))
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
@@ -275,7 +275,7 @@ class account_invoice(models.Model):
                     "fechaVencimiento":str(invoice.date_due).replace("/","-",3),
                     "horaEmision":currentTime,
                     'totalVentaGravada': total_venta_gravada,
-                    'sumatoriaIgv': sumatoria_ivg,
+                    'sumatoriaIgv': str(round(float(sumatoria_ivg),2))
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
@@ -362,7 +362,7 @@ class account_invoice(models.Model):
                     "fechaVencimiento":str(invoice.date_due).replace("/","-",3),
                     "horaEmision":currentTime,
                     'totalVentaGravada': total_venta_gravada,
-                    'sumatoriaIgv': sumatoria_ivg,
+                    'sumatoriaIgv': str(round(float(sumatoria_ivg),2))
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
