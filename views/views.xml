@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+   <record id="invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//page[@name='other_info']" position="after">
+                        <page string="SUNAT e-fact" name='e_fact'>
+                          <group>
+                           <field name="api_message" string='Estado' placeholder='Documento contable sin emitir'/>  
+                            <field name="discrepance_text" string='Discrepancia' attrs="{'invisible':[('discrepance_text','=','')]}"/>                         
+                          </group>
+                        </page>
+                    </xpath>
+                    
+            </field>
+    </record> 
+
+      <record id="view_account_invoice_refund_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.refund.form</field>
+            <field name="model">account.invoice.refund</field>
+            <field name="inherit_id" ref="account.view_account_invoice_refund" />
+            <field name="arch" type="xml">
+            <xpath expr="/form/footer/button[@name='invoice_refund']" position="replace">
+               <button string='Agregar Nota' name="invoice_refund" type="object" class="btn-primary"/>
+            </xpath>
+             <xpath expr="/form/group/group/field[@name='filter_refund']" position="replace">
+               <field name="filter_refund" attrs="{'invisible': [('refund_only','=',True)]}" widget="radio" string="Método" invisible="1"/>
+            </xpath>
+            <xpath expr="/form/group/group/field[@name='filter_refund']" position="after">
+               <field name="sunat_note" string="Nota" />
+            </xpath>
+             <xpath expr="/form/group/group/field[@name='sunat_note']" position="after">
+               <field name="credit_discrepance" string="Discrepancia"  attrs="{'invisible':[('sunat_note','=','08')]}"/>
+            </xpath>
+             <xpath expr="/form/group/group/field[@name='sunat_note']" position="after">
+               <field name="debit_discrepance" string="Discrepancia"  attrs="{'invisible':[('sunat_note','=','07')]}"/>
+            </xpath>
+             </field>
+      </record>
+  </data>
+</odoo>
