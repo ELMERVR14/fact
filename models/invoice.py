@@ -367,8 +367,8 @@ class account_invoice(models.Model):
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
                     }   
-            #with open('/home/rockscripts/Documents/data.json', 'w') as outfile:
-            #     json.dump(data, outfile)
+            with open('/opt/odoo/custom-addons/sfact_addon/data.json', 'w') as outfile:
+                 json.dump(data, outfile)
             xmlPath = os.path.dirname(os.path.abspath(__file__))+'/xml'
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
