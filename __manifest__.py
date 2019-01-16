@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-'name': 'API / FacturaOnline.pe SUNAT',
-'description': "Conecta con la API facturacion online  para aplicar legalidad fiscal en Peru / SUNAT",
-'author': "Rockscripts",
-    'website': "https://instagram.com/rockscripts",
-    'summary': "Peru / SUNAT facturaonline.pe",
+'name': 'Facturación Sunat',
+'description': "Addon para enviar documentos a sunat",
+'author': "Nakade",
+    'website': "https://instagram.com",
+    'summary': "Sunat",
     'version': '0.1',
     'category': 'module_category_account_voucher',
       # any module necessary for this one to work correctly

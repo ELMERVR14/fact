@@ -158,6 +158,12 @@ class AccountInvoiceRefund(models.TransientModel):
                    invoiceNote.update({"number":str(sequence_credit),"journal_id":int(journal.id),"discrepance_code":str(self.credit_discrepance),"discrepance_text":str(discrepance_text),"type":"out_refund"})
                 
                 if(self.sunat_note=="08"):
+
+                   result['id'] = "210"
+                   result['xml_id'] = 'account.action_invoice_out_invoice'
+                   result['display_name'] = 'Notas de Débito'
+                   #result['domain'].append(('type', '=', 'out_invoice'))
+                   #raise Warning(result)
                    journal = journal_obj.search([('code','=',str("NDB"))])
                    sequence_credit = sequence_obj.next_by_code(str("NDB"))
                    discrepance_text = ''
@@ -167,8 +173,14 @@ class AccountInvoiceRefund(models.TransientModel):
                    invoiceNote.update({"number":str(sequence_credit),"journal_id":int(journal.id),"discrepance_code":str(self.debit_discrepance),"discrepance_text":str(discrepance_text),"type":"out_invoice"})
 
                 invoice_domain = safe_eval(result['domain'])
+
+                if(self.sunat_note=="08"):
+                   invoice_domain = []
+                   invoice_domain.append(('type', '=', 'out_invoice'))
+
                 invoice_domain.append(('id', 'in', created_inv))
                 result['domain'] = invoice_domain
+                #raise Warning(result)
             return result
         return True
 

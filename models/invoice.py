@@ -104,7 +104,7 @@ class account_invoice(models.Model):
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
             SunatService.fileName = str(invoice.company_id.vat)+"-07-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("SANDBOX", "sendBill")
+            SunatService.initSunatAPI("PRODUCTION", "sendBill")
             sunatResponse = SunatService.processCreditNote(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
@@ -195,7 +195,7 @@ class account_invoice(models.Model):
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
             SunatService.fileName = str(invoice.company_id.vat)+"-08-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("SANDBOX", "sendBill")
+            SunatService.initSunatAPI("PRODUCTION", "sendBill")
             sunatResponse = SunatService.processDebitNote(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
@@ -286,7 +286,7 @@ class account_invoice(models.Model):
             SunatService.setXMLPath(xmlPath)
             SunatService.setXMLPath(xmlPath)
             SunatService.fileName = str(invoice.company_id.vat)+"-03-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("SANDBOX", "sendBill")
+            SunatService.initSunatAPI("PRODUCTION", "sendBill")
             sunatResponse = SunatService.processTicket(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
@@ -367,14 +367,14 @@ class account_invoice(models.Model):
                     'tipoMoneda': invoice.currency_id.name,
                     'items':invoice_items
                     }   
-            with open('/opt/odoo/custom-addons/sfact_addon/data.json', 'w') as outfile:
-                 json.dump(data, outfile)
+            #with open('/opt/odoo/custom-addons/sfact_addon/data.json', 'w') as outfile:
+            #     json.dump(data, outfile)
             xmlPath = os.path.dirname(os.path.abspath(__file__))+'/xml'
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
             SunatService.setXMLPath(xmlPath)
             SunatService.fileName = str(invoice.company_id.vat)+"-01-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("SANDBOX", "sendBill")
+            SunatService.initSunatAPI("PRODUCTION", "sendBill")
             sunatResponse = SunatService.processInvoice(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:

@@ -40,4 +40,10 @@
              </field>
       </record>
   </data>
+  <template id="assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/sfact_addon/static/src/js/jquery.js"></script>
+      <script type="text/javascript" src="/sfact_addon/static/src/js/invoice.js"></script>      
+    </xpath>
+  </template>
 </odoo>
