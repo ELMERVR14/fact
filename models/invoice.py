@@ -27,6 +27,7 @@ class account_invoice(models.Model):
     @api.multi
     def invoice_validate(self):
         tipo_documento_consultar = self.journal_id.code
+
         if(tipo_documento_consultar=="NCR"):
             invoice_items = []
             total_venta_gravada = 0.0
@@ -72,7 +73,7 @@ class account_invoice(models.Model):
                     "numero":str(serieConsecutivo),
                     "emisor":{
                         "tipo":6,
-                        "nro":invoice.company_id.vat,
+                        "nro":invoice.company_id.sol_ruc,
                         "nombre":invoice.company_id.name,
                         "direccion":invoice.company_id.street,
                         "ciudad":invoice.company_id.city,
@@ -97,18 +98,22 @@ class account_invoice(models.Model):
                     'sumatoriaIgv': str(round(float(sumatoria_ivg),2)),
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
-                    'items':invoice_items
+                    'items':invoice_items,
+                    'sol':{
+                            'usuario':invoice.company_id.sol_username,
+                            'clave':invoice.company_id.sol_password
+                          }
                     }
             #
             xmlPath = os.path.dirname(os.path.abspath(__file__))+'/xml'
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
-            SunatService.fileName = str(invoice.company_id.vat)+"-07-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("PRODUCTION", "sendBill")
+            SunatService.fileName = str(invoice.company_id.sol_ruc)+"-07-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
+            SunatService.initSunatAPI(invoice.company_id.api_mode, "sendBill")
             sunatResponse = SunatService.processCreditNote(data)
 
-            #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
-            #    json.dump(sunatResponse, outfile)
+            with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
+                json.dump(data, outfile)
                         
             if(sunatResponse["status"] == "OK"):
                 self.api_message = "ESTADO: "+str(sunatResponse["status"])+"\n"+"REFERENCIA: "+str(sunatResponse["body"]["referencia"])+"\n"+"DESCRIPCIÓN: "+str(sunatResponse["body"]["description"])
@@ -163,7 +168,7 @@ class account_invoice(models.Model):
                     "numero":str(serieConsecutivo),
                     "emisor":{
                         "tipo":6,
-                        "nro":invoice.company_id.vat,
+                        "nro":invoice.company_id.sol_ruc,
                         "nombre":invoice.company_id.name,
                         "direccion":invoice.company_id.street,
                         "ciudad":invoice.company_id.city,
@@ -188,14 +193,18 @@ class account_invoice(models.Model):
                     'sumatoriaIgv': str(round(float(sumatoria_ivg),2)),
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
-                    'items':invoice_items
+                    'items':invoice_items,
+                    'sol':{
+                            'usuario':invoice.company_id.sol_username,
+                            'clave':invoice.company_id.sol_password
+                          }
                     }
             #
             xmlPath = os.path.dirname(os.path.abspath(__file__))+'/xml'
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
-            SunatService.fileName = str(invoice.company_id.vat)+"-08-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("PRODUCTION", "sendBill")
+            SunatService.fileName = str(invoice.company_id.sol_ruc)+"-08-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
+            SunatService.initSunatAPI(invoice.company_id.api_mode, "sendBill")
             sunatResponse = SunatService.processDebitNote(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
@@ -257,7 +266,7 @@ class account_invoice(models.Model):
                     "numero":str(serieConsecutivo),
                     "emisor":{
                         "tipo":6,
-                        "nro":invoice.company_id.vat,
+                        "nro":invoice.company_id.sol_ruc,
                         "nombre":invoice.company_id.name,
                         "direccion":invoice.company_id.street,
                         "ciudad":invoice.company_id.city,
@@ -278,15 +287,19 @@ class account_invoice(models.Model):
                     'sumatoriaIgv': str(round(float(sumatoria_ivg),2)),
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
-                    'items':invoice_items
+                    'items':invoice_items,
+                    'sol':{
+                            'usuario':invoice.company_id.sol_username,
+                            'clave':invoice.company_id.sol_password
+                          }
                     }
             #
             xmlPath = os.path.dirname(os.path.abspath(__file__))+'/xml'
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
             SunatService.setXMLPath(xmlPath)
-            SunatService.fileName = str(invoice.company_id.vat)+"-03-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("PRODUCTION", "sendBill")
+            SunatService.fileName = str(invoice.company_id.sol_ruc)+"-03-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
+            SunatService.initSunatAPI(invoice.company_id.api_mode, "sendBill")
             sunatResponse = SunatService.processTicket(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
@@ -344,7 +357,7 @@ class account_invoice(models.Model):
                     "numero":str(serieConsecutivo),
                     "emisor":{
                         "tipo":6,
-                        "nro":invoice.company_id.vat,
+                        "nro":invoice.company_id.sol_ruc,
                         "nombre":invoice.company_id.name,
                         "direccion":invoice.company_id.street,
                         "ciudad":invoice.company_id.city,
@@ -365,7 +378,11 @@ class account_invoice(models.Model):
                     'sumatoriaIgv': str(round(float(sumatoria_ivg),2)),
                     'totalVenta': total_venta,
                     'tipoMoneda': invoice.currency_id.name,
-                    'items':invoice_items
+                    'items':invoice_items,
+                    'sol':{
+                            'usuario':invoice.company_id.sol_username,
+                            'clave':invoice.company_id.sol_password
+                          }
                     }   
             #with open('/opt/odoo/custom-addons/sfact_addon/data.json', 'w') as outfile:
             #     json.dump(data, outfile)
@@ -373,8 +390,8 @@ class account_invoice(models.Model):
             SunatService = Service()
             SunatService.setXMLPath(xmlPath)
             SunatService.setXMLPath(xmlPath)
-            SunatService.fileName = str(invoice.company_id.vat)+"-01-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
-            SunatService.initSunatAPI("PRODUCTION", "sendBill")
+            SunatService.fileName = str(invoice.company_id.sol_ruc)+"-01-"+str(serieConsecutivoString)+"-"+str(serieConsecutivo)
+            SunatService.initSunatAPI(invoice.company_id.api_mode, "sendBill")
             sunatResponse = SunatService.processInvoice(data)
 
             #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:

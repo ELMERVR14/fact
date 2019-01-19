@@ -7,8 +7,7 @@ $(document).ready(function()
     if(firstPart=="FC" || firstPart=="FD")
     {
         $("button[name=202]").fadeOut();
-    }
-    
+    }    
    }, 1000);
 })
  

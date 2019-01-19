@@ -17,7 +17,7 @@
             </field>
     </record> 
 
-      <record id="view_account_invoice_refund_inherit" model="ir.ui.view">
+    <record id="view_account_invoice_refund_inherit" model="ir.ui.view">
             <field name="name">account.invoice.refund.form</field>
             <field name="model">account.invoice.refund</field>
             <field name="inherit_id" ref="account.view_account_invoice_refund" />
@@ -39,6 +39,40 @@
             </xpath>
              </field>
       </record>
+
+       <record model="ir.ui.view" id="res_company_form_inherit">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//notebook[last()]" position="inside">
+                    <page string="Sunat e-Fact" name="geo_location">
+                    <group>
+                        <!-- something to do here -->
+                        <label for="api_mode"/>
+                          <div>
+                              <field name="api_mode" string="Modo Servicio"/>
+                          </div>
+                         <label for="sol_ruc"/>
+                          <div>
+                              <field name="sol_ruc" string="RUC"/>
+                          </div>
+
+                          <label for="sol_username"/>
+                          <div>
+                              <field name="sol_username" string="Usuario"/>
+                          </div>
+
+                          <label for="sol_password"/>
+                          <div>
+                              <field name="sol_password" string="Contraseña"/>
+                          </div>
+                          </group>
+                    </page>
+                </xpath>
+        </field>
+       </record>
+
   </data>
   <template id="assets" inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
