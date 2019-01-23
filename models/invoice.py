@@ -112,8 +112,8 @@ class account_invoice(models.Model):
             SunatService.initSunatAPI(invoice.company_id.api_mode, "sendBill")
             sunatResponse = SunatService.processCreditNote(data)
 
-            with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
-                json.dump(data, outfile)
+            #with open('/home/rockscripts/Documents/data1.json', 'w') as outfile:
+            #    json.dump(data, outfile)
                         
             if(sunatResponse["status"] == "OK"):
                 self.api_message = "ESTADO: "+str(sunatResponse["status"])+"\n"+"REFERENCIA: "+str(sunatResponse["body"]["referencia"])+"\n"+"DESCRIPCIÓN: "+str(sunatResponse["body"]["description"])
